@@ -1,5 +1,5 @@
 mkdir -p tmp_openmpi
-cd tmp_OPENMPI
+cd tmp_openmpi
 wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.0.tar.bz2
 tar -jxf openmpi-4.1.0.tar.bz2
 cd openmpi-4.1.0
