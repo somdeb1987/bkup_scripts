@@ -40,7 +40,7 @@ read -p "The default PETSc architecture is '$DEFAULT_PETSC_ARCH'. Please input a
 PETSC_ARCH=${PETSC_ARCH:-$DEFAULT_PETSC_ARCH}
 
 # Install dependencies
-sudo apt install cmake bison flex
+sudo apt install -y git cmake bison flex
 
 # Create libraries directory if it doesn't exist
 mkdir -p $(dirname $PETSC_PATH)
