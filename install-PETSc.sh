@@ -9,19 +9,30 @@
 # behavior or errors when running the script.
 #============================================================
 # Default paths and architecture
+
+# Automatically detect the MPI directory
+MPI_BIN_PATH=$(which mpicc)
+if [ -n "$MPI_BIN_PATH" ]; then
+    # Extract the directory path from the MPI binary path
+    DEFAULT_MPI_DIR=$(dirname $(dirname $MPI_BIN_PATH))
+else
+    # Fallback to a predefined default if 'which mpicc' doesn't return anything
+    DEFAULT_MPI_DIR="$HOME/.openmpi/v4.1.5"
+fi
+
+# Ask user for OpenMPI directory
+read -p "The detected path for OpenMPI is '$DEFAULT_MPI_DIR'. Please input a path if you wish to change (press Enter to use default): " MPI_DIR
+# Use default if user input is empty
+MPI_DIR=${MPI_DIR:-$DEFAULT_MPI_DIR}
+
+
 DEFAULT_PETSC_PATH="$HOME/libraries/petsc"
-DEFAULT_MPI_DIR="$HOME/.openmpi/v4.1.5"
 DEFAULT_PETSC_ARCH="arch-linux2-c-debug"
 
 # Ask user for PETSc installation path
 read -p "The default installation path for PETSc is '$DEFAULT_PETSC_PATH'. Please input a path if you wish to change (press Enter to use default): " PETSC_PATH
 # Use default if user input is empty
 PETSC_PATH=${PETSC_PATH:-$DEFAULT_PETSC_PATH}
-
-# Ask user for OpenMPI directory
-read -p "The default path for OpenMPI is '$DEFAULT_MPI_DIR'. Please input a path if you wish to change (press Enter to use default): " MPI_DIR
-# Use default if user input is empty
-MPI_DIR=${MPI_DIR:-$DEFAULT_MPI_DIR}
 
 # Ask user for PETSc architecture
 read -p "The default PETSc architecture is '$DEFAULT_PETSC_ARCH'. Please input an architecture if you wish to change (press Enter to use default): " PETSC_ARCH
